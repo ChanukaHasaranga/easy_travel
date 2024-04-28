@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_travel/const/itemcontainer.dart';
 import 'package:easy_travel/const/my_color.dart';
+import 'package:easy_travel/profilepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,8 +15,13 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   var searchtext='';
+  String img='';
   @override
   Widget build(BuildContext context) {
+    img="https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png";
+    if (img == null || img.isEmpty) {
+  img = "https://toppng.com/uploads/preview/blue-white-gears-settings-round-icon-11641843618qk1d4orlcq.png"; // URL for the default image
+}
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;    
     return Scaffold(
@@ -86,9 +92,11 @@ class _homepageState extends State<homepage> {
           ],
 
          ),
+         //bottombar
          bottomNavigationBar: Container(
           height: height/12,
            child: BottomNavigationBar(
+            backgroundColor: MyColors.white,
             selectedLabelStyle: TextStyle(fontSize: 0),
             unselectedLabelStyle: TextStyle(fontSize: 0),
             items:[BottomNavigationBarItem(
@@ -96,16 +104,13 @@ class _homepageState extends State<homepage> {
             icon:IconButton(onPressed:() {
               
             }, icon: Icon(Icons.home,color: MyColors.forgetpassword)),
-            label:''
-            
-            
+               label:''
             ),
             BottomNavigationBarItem(
             
-            icon:IconButton(onPressed:() {
-              
-            }, icon: Icon(Icons.bookmark,color: MyColors.remembercolour)),
-            label:''
+            icon:IconButton(onPressed:() {}, 
+               icon: Icon(Icons.bookmark,color: MyColors.remembercolour)),
+               label:''
             
             ),
              BottomNavigationBarItem(
@@ -113,18 +118,25 @@ class _homepageState extends State<homepage> {
             icon:IconButton(onPressed:() {
               
             }, icon: Icon(Icons.receipt,color: MyColors.remembercolour)),
-            label:''
+               label:''
             
             ),
            BottomNavigationBarItem(
-             icon: Container(
-               height: 20,
-               width: 20,
-               decoration: BoxDecoration(
-                 shape: BoxShape.circle,
-                 image: DecorationImage(
-                   image: NetworkImage("https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png") ?? NetworkImage("https://toppng.com/uploads/preview/blue-person-icon-blue-person-icon-115629039821nthr4gtiu.png"),
-                   fit: BoxFit.contain,
+             icon: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+                  return profilepage(img: img);
+                },));
+              },
+               child: Container(
+                 height: height/39.05,
+                 width: width/19.6,
+                 decoration: BoxDecoration(
+                   shape: BoxShape.circle,
+                   image: DecorationImage(
+                     image: NetworkImage(img),
+                     fit: BoxFit.contain,
+                   ),
                  ),
                ),
              ),
