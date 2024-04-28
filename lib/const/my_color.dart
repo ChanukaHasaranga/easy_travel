@@ -13,7 +13,12 @@ class MyColors {
   static const Color remembercolour=Color(0xff798494);
   static const Color forgetpassword=Color(0xff2194FF);
   static const Color dividercolour=Color(0xffC5C5C5);
-    static const Color location=Color(0xff0B131E);
+  static const Color location=Color(0xff0B131E);
+  static const Color bellicon=Color(0xffC4C4C4);
+  static const Color red=Color(0xffEC4747);
+  static const Color star=Color(0xffFEE645);
+
+
 
 
 
