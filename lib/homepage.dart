@@ -86,6 +86,56 @@ class _homepageState extends State<homepage> {
           ],
 
          ),
+         bottomNavigationBar: Container(
+          height: height/12,
+           child: BottomNavigationBar(
+            selectedLabelStyle: TextStyle(fontSize: 0),
+            unselectedLabelStyle: TextStyle(fontSize: 0),
+            items:[BottomNavigationBarItem(
+            
+            icon:IconButton(onPressed:() {
+              
+            }, icon: Icon(Icons.home,color: MyColors.forgetpassword)),
+            label:''
+            
+            
+            ),
+            BottomNavigationBarItem(
+            
+            icon:IconButton(onPressed:() {
+              
+            }, icon: Icon(Icons.bookmark,color: MyColors.remembercolour)),
+            label:''
+            
+            ),
+             BottomNavigationBarItem(
+            
+            icon:IconButton(onPressed:() {
+              
+            }, icon: Icon(Icons.receipt,color: MyColors.remembercolour)),
+            label:''
+            
+            ),
+           BottomNavigationBarItem(
+             icon: Container(
+               height: 20,
+               width: 20,
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 image: DecorationImage(
+                   image: NetworkImage("https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png") ?? NetworkImage("https://toppng.com/uploads/preview/blue-person-icon-blue-person-icon-115629039821nthr4gtiu.png"),
+                   fit: BoxFit.contain,
+                 ),
+               ),
+             ),
+             label: '',
+           )
+             
+            
+           
+            
+            ]),
+         ),
          body: SingleChildScrollView(
            child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,7 +176,7 @@ class _homepageState extends State<homepage> {
                 Padding(
                   padding: EdgeInsets.only(right: width/20,left: width/20,top: height/30),
                   child: Container(
-                    height: height/1.5,
+                    height: height/1.6,
                     child: StreamBuilder<QuerySnapshot>(
                       stream:FirebaseFirestore.instance.collection("travel").where("country",isGreaterThanOrEqualTo:searchtext).where("country",isLessThan: '${searchtext}z').snapshots(),
                       builder: (context, snapshot) {
