@@ -1,4 +1,5 @@
 import 'package:easy_travel/const/my_color.dart';
+import 'package:easy_travel/homepage.dart';
 import 'package:flutter/material.dart';
 
 class pagebuttons extends StatefulWidget {
@@ -24,7 +25,9 @@ class _pagebuttonsState extends State<pagebuttons> {
         fixedSize: Size(width, height/15.6)
       ),
       onPressed:() {
-      
+      Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+        return homepage();
+      },));
       }, 
           child:Text(widget.txt,style: TextStyle(color:MyColors.white,fontSize:width/21.8),)
     );

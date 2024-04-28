@@ -13,6 +13,9 @@ class MyColors {
   static const Color remembercolour=Color(0xff798494);
   static const Color forgetpassword=Color(0xff2194FF);
   static const Color dividercolour=Color(0xffC5C5C5);
+    static const Color location=Color(0xff0B131E);
+
+
 
   
 
