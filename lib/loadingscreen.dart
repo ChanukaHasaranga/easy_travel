@@ -58,7 +58,7 @@ print(height);
                         crossAxisAlignment: CrossAxisAlignment.center, 
                         children: [
                           Container(
-                            height: height/7,
+                            height: width/2.7,
                             decoration: BoxDecoration(
                               image: DecorationImage(image: AssetImage("sourcess/logo1.png"),fit: BoxFit.contain)
                             ),
@@ -71,7 +71,7 @@ print(height);
                               percent: percent,
                               animation: true,
                               progressColor: MyColors.white,
-                              
+                              animationDuration: 300,
                               
                               
                             ),
