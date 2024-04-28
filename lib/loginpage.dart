@@ -147,9 +147,9 @@ bool _isChecked=false;
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    otherlogin(img: 'sourcess/facebook.png', Height: height/39, Width: width/36.3,),
-                    otherlogin(img: 'sourcess/twitter.png', Height: height/42.3, Width: width/29.1,),
-                    otherlogin(img: 'sourcess/G+.png', Height: height/48.2, Width: width/25.2,)
+                    otherlogin(img: 'sourcess/facebook.png', Height: height/39, Width: width/36.3, radiuss: 22, colourss: MyColors.forgetpassword,),
+                    otherlogin(img: 'sourcess/twitter.png', Height: height/42.3, Width: width/29.1, radiuss: 22, colourss: MyColors.forgetpassword,),
+                    otherlogin(img: 'sourcess/G+.png', Height: height/48.2, Width: width/25.2, radiuss: 22, colourss:MyColors.forgetpassword,)
                   ],
                 ),
               )

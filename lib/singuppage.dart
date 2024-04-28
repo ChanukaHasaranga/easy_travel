@@ -2,6 +2,7 @@ import 'package:easy_travel/const/dividerbox.dart';
 import 'package:easy_travel/const/my_color.dart';
 import 'package:easy_travel/const/otherlogin.dart';
 import 'package:easy_travel/const/pagebuttons.dart';
+import 'package:easy_travel/loginpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -157,27 +158,26 @@ bool _isChecked=false;
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                      Text("Already have an account?",style: TextStyle(color:MyColors.remembercolour,fontSize:width/24.5)),
+                      Text("Already have an account ?",style: TextStyle(color:MyColors.remembercolour,fontSize:width/24.5)),
                       GestureDetector(
                         onTap:() {
-                          
+                          Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+                            return loginpage();
+                          },));
                         }, 
-                        child: Text(" Register now",style: TextStyle(color:MyColors.forgetpassword,fontSize:width/24.5))),
+                        child: Text(" Sign In",style: TextStyle(color:Color.fromARGB(255, 26, 218, 148),fontSize:width/24.5))),
                 
                 ],),
               ),
               Padding(
-                padding:  EdgeInsets.only(top: height/65),
-                child: dividerbox(),
-              ),
-              Padding(
-                padding:  EdgeInsets.only(left: width/10.2,right: width/10.2,top: height/40),
+                padding:  EdgeInsets.only(right: width/8.2,top: height/40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    otherlogin(img: 'sourcess/facebook.png', Height: height/39, Width: width/36.3,),
-                    otherlogin(img: 'sourcess/twitter.png', Height: height/42.3, Width: width/29.1,),
-                    otherlogin(img: 'sourcess/G+.png', Height: height/48.2, Width: width/25.2,)
+                    Text("Or use: ",style: TextStyle(color:MyColors.remembercolour,fontSize:width/24.5)),
+                    otherlogin(img: 'sourcess/facebook.png', Height: height/39, Width: width/36.3, radiuss: 10, colourss: MyColors.enablebordercolour,),
+                    otherlogin(img: 'sourcess/twitter.png', Height: height/42.3, Width: width/29.1, radiuss: 10, colourss: MyColors.enablebordercolour,),
+                    otherlogin(img: 'sourcess/G+.png', Height: height/48.2, Width: width/25.2, radiuss: 10, colourss: MyColors.enablebordercolour,)
                   ],
                 ),
               )
