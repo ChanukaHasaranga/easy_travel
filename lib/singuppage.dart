@@ -215,7 +215,9 @@ bool _isChecked=false;
   
                        {'name':name.text.trim(),
                         'email':email.text.trim(),
-                        "image":'https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png'
+                        "image":'https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png',
+                        "phoneNumber":"123456789",
+                        "location":"Sydney, Australia "
                         }
                         );
                              Navigator.of(context).push(MaterialPageRoute(builder:(context) {    

@@ -44,7 +44,7 @@ class _homepageState extends State<homepage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(Icons.location_on,size: width/19.6,color: MyColors.location,),
-                          Text("Sydney, Australia ",style: TextStyle(color: MyColors.location,fontSize:width/21.8,fontWeight: FontWeight.bold),),
+                          Text(userdataperson["location"],style: TextStyle(color: MyColors.location,fontSize:width/21.8,fontWeight: FontWeight.bold),),
                           Icon(Icons.arrow_drop_down,size: width/19.6,color: MyColors.location,),
                        ],
                       )

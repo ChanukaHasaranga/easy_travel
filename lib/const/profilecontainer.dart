@@ -1,5 +1,7 @@
 import 'package:easy_travel/const/my_color.dart';
 import 'package:easy_travel/const/profileedit.dart';
+import 'package:easy_travel/loginpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,11 +30,20 @@ class _profilecontainerState extends State<profilecontainer> {
     return Column(
       children: [
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               if(widget.txt==" Personal information"){
                 Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                  return profileeditpage();
+                  return ProfileEditPage();
                 },));
+              }else if(widget.txt==" Sign out"){
+                try {
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+                return loginpage();
+              },));
+            } catch (e) {
+              print("Error signing out: $e");
+            }
               }
             },
             child: Container(
