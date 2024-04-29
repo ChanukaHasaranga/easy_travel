@@ -4,6 +4,7 @@ import 'package:easy_travel/const/otherlogin.dart';
 import 'package:easy_travel/const/pagebuttons.dart';
 import 'package:easy_travel/homepage.dart';
 import 'package:easy_travel/singuppage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -128,9 +129,7 @@ bool _isChecked=false;
                           fixedSize: Size(width, height/15.6)
                                     ),
                            onPressed:() {
-                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                                   return homepage();
-                              },));
+                              singin();
                              }, 
           child:Text("Sign In",style: TextStyle(color:MyColors.white,fontSize:width/21.8),)
     )
@@ -173,5 +172,43 @@ bool _isChecked=false;
       ),
 
     );
+  }
+  Future singin() async{
+
+    try {
+  await FirebaseAuth.instance.signInWithEmailAndPassword
+(
+email: email.text.trim(), 
+
+password: password.text.trim()
+
+);
+Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+  return homepage();
+},));
+      
+    }on FirebaseAuthException catch (e) {
+      
+ showDialog(context: context, 
+  
+  builder:(context) {
+    return AlertDialog(
+      iconPadding: EdgeInsets.only(bottom:0,right: 20),
+      title: Center(child: Text("Invalid Email or Password!\nTry again",style: TextStyle(fontSize: 15),)),
+      icon: IconButton(onPressed:() {
+      Navigator.of(context).pop();
+      }, icon: Icon(Icons.close,size: 15,),alignment: Alignment.topRight,)
+      
+     );
+
+  },
+  
+  
+  );
+
+      
+    }
+
+
   }
 }
