@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class singuppage extends StatefulWidget {
   const singuppage({super.key});
@@ -37,7 +38,7 @@ bool _isChecked=false;
            Navigator.of(context).pop();
          }, icon:Icon(Icons.arrow_back_ios,size:width/30,color: MyColors.darkblue,)),
          backgroundColor:MyColors.white,
-         title: Center(child: Text("Sing up",style:TextStyle(fontSize:width/19.65,color:MyColors.darkblue,fontWeight:FontWeight.bold),)),
+         title: Center(child: Text("Sing up",style:GoogleFonts.josefinSans(fontSize:width/19.65,color:MyColors.darkblue,fontWeight:FontWeight.bold),)),
       ),
       body: SingleChildScrollView(
        child: Padding(

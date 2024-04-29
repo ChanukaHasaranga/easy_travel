@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileEditPage extends StatefulWidget {
@@ -38,6 +39,7 @@ void _pickImage() async {
     final currentuser = FirebaseAuth.instance.currentUser!;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance.collection("users").doc(currentuser.email!).snapshots(),
       builder: (context, snapshot) {
@@ -47,95 +49,123 @@ void _pickImage() async {
           newemail.text = userdataperson["email"];
           phonenumber.text = userdataperson["phoneNumber"];
           location.text = userdataperson["location"];
-          return Scaffold(
-            backgroundColor: MyColors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              automaticallyImplyLeading: false,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(Icons.arrow_back_ios, size: width / 30, color: MyColors.darkblue),
-              ),
-              title: Center(
-                child: Text(
-                  "Edit personal info",
-                  style: TextStyle(fontSize: width / 19.65, color: MyColors.darkblue),
+          return WillPopScope(
+      onWillPop: () async {
+        // Return true to block back button press
+        return false;
+      },
+            child: Scaffold(
+              backgroundColor: MyColors.white,
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_ios, size: width / 30, color: MyColors.darkblue),
+                ),
+                title: Center(
+                  child: Text(
+                    "Edit personal info",
+                    style: GoogleFonts.josefinSans(fontSize: width / 19.65, color: MyColors.darkblue),
+                  ),
                 ),
               ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(right: width / 30, left: width / 30, top: height / 20),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _pickImage();
+                            },
+                            child: CircleAvatar(
+              radius: width / 13.01,
+              backgroundImage: _image != null ? FileImage(_image!) as ImageProvider : NetworkImage(userdataperson["image"]),
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(right: width / 30, left: width / 30, top: height / 20),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _pickImage();
-                          },
-                          child: CircleAvatar(
-  radius: width / 13.01,
-  backgroundImage: _image != null ? FileImage(_image!) as ImageProvider : NetworkImage(userdataperson["image"]),
-),
-
-                        ),
-                        SizedBox(
-                          width: width / 30,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.camera_alt,
-                              size: width / 24.54,
-                              color: MyColors.forgetpassword,
-                            ),
-                            SizedBox(
-                              width: width / 45,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _pickImage();
-                              },
-                              child: Text(
-                                "Update photo",
-                                style: TextStyle(color: MyColors.forgetpassword, fontWeight: FontWeight.w500, fontSize: width / 24.54),
+            
+                          ),
+                          SizedBox(
+                            width: width / 30,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.camera_alt,
+                                size: width / 24.54,
+                                color: MyColors.forgetpassword,
                               ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: height / 28),
-                      child: Container(
-                        height: height / 15.62,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: MyColors.black, width: 2),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: width / 30, top: height / 60),
-                          child: Text(
-                            userdataperson["email"],
-                            style: TextStyle(color: MyColors.darkblue, fontSize: width / 24.54),
+                              SizedBox(
+                                width: width / 45,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  _pickImage();
+                                },
+                                child: Text(
+                                  "Update photo",
+                                  style: GoogleFonts.catamaran(color: MyColors.forgetpassword, fontWeight: FontWeight.w500, fontSize: width / 24.54),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: height / 28),
+                        child: Container(
+                          height: height / 15.62,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: MyColors.black, width: 2),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: width / 30, top: height / 60),
+                            child: Text(
+                              userdataperson["email"],
+                              style: TextStyle(color: MyColors.darkblue, fontSize: width / 24.54),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: height / 70),
-                      child: Container(
+                      Padding(
+                        padding: EdgeInsets.only(top: height / 70),
+                        child: Container(
+                          height: height / 15.62,
+                          child: TextField(
+                            controller: newname,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: "name",
+                              hintStyle: TextStyle(color: MyColors.focusbordercolour, fontSize: width / 24.5),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(16),
+                                borderSide: BorderSide(color: MyColors.black),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(16),
+                                borderSide: BorderSide(color: MyColors.enablebordercolour),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height / 70,
+                      ),
+                      Container(
                         height: height / 15.62,
                         child: TextField(
-                          controller: newname,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: phonenumber,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            hintText: "name",
+                            hintText: "Mobile Number",
                             hintStyle: TextStyle(color: MyColors.focusbordercolour, fontSize: width / 24.5),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
@@ -148,69 +178,47 @@ void _pickImage() async {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: height / 70,
-                    ),
-                    Container(
-                      height: height / 15.62,
-                      child: TextField(
-                        controller: phonenumber,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: "Mobile Number",
-                          hintStyle: TextStyle(color: MyColors.focusbordercolour, fontSize: width / 24.5),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: MyColors.black),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: MyColors.enablebordercolour),
+                      SizedBox(
+                        height: height / 70,
+                      ),
+                      Container(
+                        height: height / 15.62,
+                        child: TextField(
+                          controller: location,
+                          keyboardType: TextInputType.streetAddress,
+                          decoration: InputDecoration(
+                            hintText: "Location",
+                            hintStyle: TextStyle(color: MyColors.focusbordercolour, fontSize: width / 24.5),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: MyColors.black),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: MyColors.enablebordercolour),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: height / 70,
-                    ),
-                    Container(
-                      height: height / 15.62,
-                      child: TextField(
-                        controller: location,
-                        keyboardType: TextInputType.streetAddress,
-                        decoration: InputDecoration(
-                          hintText: "Location",
-                          hintStyle: TextStyle(color: MyColors.focusbordercolour, fontSize: width / 24.5),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: MyColors.black),
+                      Padding(
+                        padding: EdgeInsets.only(top: height / 40),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: MyColors.buttonblue,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            fixedSize: Size(width, height / 15.6),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: MyColors.enablebordercolour),
+                          onPressed: () {
+                            _updateUserData();
+                          },
+                          child: Text(
+                            "Save",
+                            style: TextStyle(color: MyColors.white, fontSize: width / 21.8),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: height / 40),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: MyColors.buttonblue,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          fixedSize: Size(width, height / 15.6),
-                        ),
-                        onPressed: () {
-                          _updateUserData();
-                        },
-                        child: Text(
-                          "Save",
-                          style: TextStyle(color: MyColors.white, fontSize: width / 21.8),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -238,18 +246,14 @@ void _pickImage() async {
 
     try {
       if (_image != null) {
-        // Upload image to Firebase Storage
         final storageRef = FirebaseStorage.instance.ref().child('user_images').child('${currentuser.uid}.jpg');
         await storageRef.putFile(_image!);
 
-        // Get the download URL of the uploaded image
         final imageUrl = await storageRef.getDownloadURL();
 
-        // Update image URL in Firestore
         newData["image"] = imageUrl;
       }
 
-      // Update user data in Firestore
       await FirebaseFirestore.instance.collection("users").doc(currentuser.email!).update(newData);
 
       ScaffoldMessenger.of(context).showSnackBar(

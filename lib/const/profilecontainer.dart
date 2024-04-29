@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class profilecontainer extends StatefulWidget {
 String txt;
@@ -38,9 +39,7 @@ class _profilecontainerState extends State<profilecontainer> {
               }else if(widget.txt==" Sign out"){
                 try {
               await FirebaseAuth.instance.signOut();
-              Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                return loginpage();
-              },));
+
             } catch (e) {
               print("Error signing out: $e");
             }
@@ -56,7 +55,7 @@ class _profilecontainerState extends State<profilecontainer> {
                       children: [
                          Icon(widget.pic, size: width / 19.63, color: MyColors.remembercolour),
                          SizedBox(width: width / 30),
-                         Text(widget.txt,style: TextStyle(fontSize: width / 24.54, color: MyColors.darkblue, fontWeight: FontWeight.w500),),
+                         Text(widget.txt,style: GoogleFonts.catamaran(fontSize: width / 24.54, color: MyColors.darkblue, fontWeight: FontWeight.w500),),
                   ],
                ),
                   Expanded(

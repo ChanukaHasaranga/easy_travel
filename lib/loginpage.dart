@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({super.key});
@@ -34,7 +35,7 @@ bool _isChecked=false;
            Navigator.of(context).pop();
          }, icon:Icon(Icons.arrow_back_ios,size:width/30,color: MyColors.darkblue,)),
          backgroundColor:MyColors.white,
-         title: Center(child: Text("Sing in",style:TextStyle(fontSize:width/19.65,color:MyColors.darkblue,fontWeight:FontWeight.bold),)),
+         title: Center(child: Text("Sing in",style:GoogleFonts.josefinSans(fontSize:width/19.65,color:MyColors.darkblue,fontWeight:FontWeight.bold),)),
       ),
       body: SingleChildScrollView(
        child: Padding(
@@ -44,7 +45,7 @@ bool _isChecked=false;
           children: [
               Padding(
                 padding:  EdgeInsets.only(top:height/12),
-                child: Text("Welcome\nback!",style: TextStyle(color: MyColors.darkblue,fontSize:width/8.1,fontWeight:FontWeight.bold,shadows:[Shadow(blurRadius:2,color:MyColors.black,offset: Offset.zero)]),),
+                child: Text("Welcome\nback!",style: GoogleFonts.josefinSans(color: MyColors.darkblue,fontSize:width/8.1,fontWeight:FontWeight.bold,shadows:[Shadow(blurRadius:2,color:MyColors.black,offset: Offset.zero)]),),
               ),
               Padding(
                 padding:  EdgeInsets.only(top: height/28),
