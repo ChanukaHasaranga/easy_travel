@@ -2,6 +2,7 @@ import 'package:easy_travel/const/dividerbox.dart';
 import 'package:easy_travel/const/my_color.dart';
 import 'package:easy_travel/const/otherlogin.dart';
 import 'package:easy_travel/const/pagebuttons.dart';
+import 'package:easy_travel/homepage.dart';
 import 'package:easy_travel/singuppage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +121,19 @@ bool _isChecked=false;
               ),
               Padding(
                 padding:  EdgeInsets.only(top:height/40),
-                child: pagebuttons(txt:'Sign In',),
+                child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.buttonblue,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          fixedSize: Size(width, height/15.6)
+                                    ),
+                           onPressed:() {
+                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+                                   return homepage();
+                              },));
+                             }, 
+          child:Text("Sign In",style: TextStyle(color:MyColors.white,fontSize:width/21.8),)
+    )
               ),
               Padding(
                 padding:  EdgeInsets.only(top:height/40),

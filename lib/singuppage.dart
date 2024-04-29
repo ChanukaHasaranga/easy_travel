@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_travel/const/dividerbox.dart';
 import 'package:easy_travel/const/my_color.dart';
 import 'package:easy_travel/const/otherlogin.dart';
 import 'package:easy_travel/const/pagebuttons.dart';
+import 'package:easy_travel/homepage.dart';
 import 'package:easy_travel/loginpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -151,7 +154,17 @@ bool _isChecked=false;
               ),
               Padding(
                 padding:  EdgeInsets.only(top:height/40),
-                child: pagebuttons(txt:'Sign Up',),
+                child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.buttonblue,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          fixedSize: Size(width, height/15.6)
+                                    ),
+                           onPressed:() {
+                                Singupcheck();
+                             }, 
+          child:Text("Sign Up",style: TextStyle(color:MyColors.white,fontSize:width/21.8),)
+    ),
               ),
               Padding(
                 padding:  EdgeInsets.only(top:height/40),
@@ -189,4 +202,79 @@ bool _isChecked=false;
 
     );
   }
+   Future Singupcheck() async {
+
+           if(passwordconfirm()){
+                   try {
+                    UserCredential userCredential=
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email:email.text.trim(), 
+                    password:password.text.trim()
+                           );
+                      FirebaseFirestore.instance.collection("users").doc(userCredential.user!.email!).set(
+  
+                       {'name':name.text.trim(),
+                        'email':email.text.trim(),
+                        "image":'https://toppng.com/uploads/preview/person-vector-11551054765wbvzeoxz2c.png'
+                        }
+                        );
+                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {    
+                                 return const homepage();
+
+                              },));
+
+                    }on FirebaseAuthException catch(e) {
+     
+                           showDialog(context: context, 
+                            builder:(context) {
+                              return AlertDialog(
+                                iconPadding: EdgeInsets.only(bottom:0,right: 20),
+                                title: Center(child: Text("${e.message}",style: TextStyle(fontSize: 15),)),
+                                icon: IconButton(onPressed:() {
+                                      Navigator.of(context).pop();
+                                       }, icon: Icon(Icons.close,size: 15,),alignment: Alignment.topRight,)
+      
+                              );
+
+                            },
+  
+  
+                            );
+                      }
+                       
+
+            }else{
+  showDialog(
+    
+    context: context, 
+  
+  builder:(context) {
+    return AlertDialog(
+      iconPadding: EdgeInsets.only(bottom:0,right: 20),
+      title: Center(child: Text("Password dosen't match!",style: TextStyle(fontSize: 15),)),
+      icon: IconButton(onPressed:() {
+      Navigator.of(context).pop();
+      }, icon: Icon(Icons.close,size: 15,),alignment: Alignment.topRight,)
+      
+     );
+
+  },
+  
+  
+  );
+}
+
+                
+       } 
+       bool passwordconfirm(){
+
+            if(password.text.trim()==confirm.text.trim()){
+
+                  return true;
+                     }else{
+                        return false;
+
+                      }
+             }
+             
 }
