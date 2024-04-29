@@ -5,7 +5,6 @@ import 'package:easy_travel/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class profilepage extends StatefulWidget {
   String img;
@@ -99,7 +98,7 @@ class _profilepageState extends State<profilepage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(userdataperson["name"],style: GoogleFonts.josefinSans(color: MyColors.darkblue,fontSize: width/16.3,fontWeight: FontWeight.bold),),
+                            Text(userdataperson["name"],style:TextStyle(color: MyColors.darkblue,fontSize: width/16.3,fontWeight: FontWeight.bold),),
                             Row(
                               children: [
                                 Text("{\$ - USD} ",style: TextStyle(color: MyColors.remembercolour,fontSize: width/24.5),),

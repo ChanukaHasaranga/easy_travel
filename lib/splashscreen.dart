@@ -40,7 +40,6 @@ if (user !=null && mounted) {
     double width=MediaQuery.of(context).size.width;
     print(width);
     return Scaffold(
-    
             body:Stack(
               children:[ Container(
                 decoration: BoxDecoration(
