@@ -39,7 +39,11 @@ class _profilecontainerState extends State<profilecontainer> {
               }else if(widget.txt==" Sign out"){
                 try {
               await FirebaseAuth.instance.signOut();
-
+              Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => loginpage()),
+      (route) => false,
+    );
             } catch (e) {
               print("Error signing out: $e");
             }
